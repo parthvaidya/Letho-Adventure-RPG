@@ -1,5 +1,6 @@
 #include "Character.h"
 #include <cstdlib>
+#include <ctime>
 #include <iostream>
 
 // Implementation of Player methods
@@ -9,6 +10,10 @@ Player::Player()
       criticalHitUnlocked(false), blockerUnlocked(false),
       lifeStealUnlocked(false), rangedAttackUnlocked(false) {}
 
+//random in range
+int getRandomInRange(int min, int max) {
+  return min + (rand() % (max - min + 1));
+}
 // player attacks
 void Player::attack() {
   int damage = meleeDamage;
@@ -69,7 +74,7 @@ void Player::levelUp(int level) {
 // player gives damage
 
 void Player::applyDamage(int damage) {
-  if (blockerUnlocked && rand() % 100 < 10) {
+  if (blockerUnlocked && getRandomInRange(1, 100) <= 10) {
     std::cout << "Blocker Activated! No damage taken!" << std::endl;
     return;
   }
